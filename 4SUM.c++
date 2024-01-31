@@ -21,23 +21,23 @@ int main()
         {
             continue;
         }
-        for (int j = i; j < n - 2; j++)
+        for (int j = i+1; j < n - 2; j++)
         {
             if (j > i && nums[j] == nums[j - 1])
             {
                 continue;
             }
-            int sum = target - nums[i] - nums[j];
+            int sum = nums[i] + nums[j];
             int first = j + 1;
             int last = n - 1;
             while (first < last)
             {
-                if (nums[first] + nums[last] == sum)
+                if (nums[first] + nums[last] + sum == target)
                 {
                     cout << nums[i] << " " << nums[j] << " " << nums[first] << " " << nums[last] << endl;
                     break;
                 }
-                else if (nums[first] + nums[last] < sum)
+                else if (nums[first] + nums[last] + sum < target)
                 {
                     first++;
                 }
