@@ -1,4 +1,4 @@
-/*                        nth fibbonacci number leetcode 509*/
+/*                        nth fibbonacci number leetcode 50*/
 // class Solution {
 // public:
 // int fibbohelper(int n,int *arr)
