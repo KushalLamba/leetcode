@@ -14,31 +14,32 @@ int main()
         cin >> arr[i];
     }
     int index = -1;
-    for (int i = n - 2; i >= 0; i--)
+    for(int i=n-2;i>=0;i--)
     {
-        if (arr[i] < arr[i + 1])
+        if(arr[i]<arr[i+1])
         {
-            index = i;
+            index=i;
+            cout<<index<<endl;
             break;
         }
     }
-    if (index == -1)
+    if(index==-1)
     {
-        sort(arr, arr + n);
+        sort(arr,arr+n);
     }
-    else
+    else{
+    for(int i=n-1;i>index;i--)
     {
-        for (int i = n - 1; i >=index + 1; i--)
+        if(arr[i]>arr[index])
         {
-            if (arr[i] > arr[index])
-            {
-                swap(arr[i], arr[index]);
-                break;
-            }
+            cout<<arr[i]<<endl;
+            swap(arr[i],arr[index]);
+            sort(arr+index+1,arr+n);
         }
     }
-    for (int i = 0; i < n; i++)
+    }
+    for(int i=0;i<n;i++)
     {
-        cout << arr[i] << " ";
+        cout<<arr[i]<<" ";
     }
 }
