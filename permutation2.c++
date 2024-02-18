@@ -6,23 +6,26 @@ void helper(vector<int> &nums, vector<int> &temp, int start, int end)
 {
     if (start == end)
     {
-        for(int i=0;i<nums.size();i++)
+        for (int i = 0; i < nums.size(); i++)
         {
             temp.push_back(nums[i]);
         }
         ans.push_back(temp);
-        for(int i=0;i<nums.size();i++)
+        for (int i = 0; i < nums.size(); i++)
         {
             temp.pop_back();
         }
         return;
     }
-        for (int i = start; i <= end; i++)
+    for (int i = start; i <= end; i++)
+    {
+        swap(nums[start], nums[i]);
+        if (i==end || nums[i+1] != nums[i])
         {
-            swap(nums[start], nums[i]);
             helper(nums, temp, start + 1, end);
-            swap(nums[start], nums[i]);
         }
+        swap(nums[start], nums[i]);
+    }
 }
 int main()
 {
