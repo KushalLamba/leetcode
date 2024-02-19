@@ -6,10 +6,22 @@ double myPow(double x, int n)
     {
         return 0;
     }
-    int ans=x;
-    for (int i = 1; i < n; i++)
+    double ans = 1.0 * x;
+    if (n < 0)
     {
-        x = x * ans;
+        n = n * -1;
+        x = 1;
+        for (int i = 0; i < n; i++)
+        {
+            x = x / ans;
+        }
+    }
+    else
+    {
+        for (int i = 1; i < n; i++)
+        {
+            x = x * ans;
+        }
     }
     return x;
 }
@@ -21,5 +33,5 @@ int main()
     cout << "Enter Power: " << endl;
     int n;
     cin >> n;
-    cout<<myPow(x,n);
+    cout << myPow(x, n);
 }
