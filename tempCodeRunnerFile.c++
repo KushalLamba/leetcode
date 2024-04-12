@@ -1,13 +1,38 @@
-double myPow(double x, int n)
+int canCompleteCircuit(vector<int> &gas, vector<int> &cost)
 {
-    if (x == 0)
+    int sumg = 0;
+    int sumc = 0;
+
+    for (int i = 0; i < cost.size(); i++)
     {
-        return 0;
+        sumg += gas[i];
+        sumc += cost[i];
     }
-    int ans=x;
-    for (int i = 1; i < n; i++)
+    if (sumc > sumg)
     {
-        x = x * ans;
+        return -1;
     }
-    return x;
+    int n = gas.size()-1;
+    int sol = 0;
+    int prev = 0;
+    int i = 0;
+    while (i != n)
+    {
+        if (i >= gas.size())
+        {
+            i = 0;
+        }
+        else if (gas[i] + prev < cost[i])
+        {
+            sol = i + 1;
+            n = i;
+            prev = 0;
+        }
+        else
+        {
+            prev = gas[i] - cost[i];
+        }
+        i++;
+    }
+    return sol;
 }
