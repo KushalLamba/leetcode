@@ -1,38 +1,34 @@
-int canCompleteCircuit(vector<int> &gas, vector<int> &cost)
+string removeKdigits(string num, int k)
 {
-    int sumg = 0;
-    int sumc = 0;
-
-    for (int i = 0; i < cost.size(); i++)
+    if (num.empty())
     {
-        sumg += gas[i];
-        sumc += cost[i];
+        return "";
     }
-    if (sumc > sumg)
+    if (num.size() == 1 && k > 0)
     {
-        return -1;
+        return "0";
     }
-    int n = gas.size()-1;
-    int sol = 0;
-    int prev = 0;
-    int i = 0;
-    while (i != n)
+    string s;
+    s.push_back(num[0]);
+    int i = 1;
+    while (i < num.size() && k != 0)
     {
-        if (i >= gas.size())
+        if (s[s.size() - 1] == num[i])
         {
-            i = 0;
+            s.push_back(num[i]);
+            k++;
         }
-        else if (gas[i] + prev < cost[i])
+        if (s[s.size() - 1] > num[i])
         {
-            sol = i + 1;
-            n = i;
-            prev = 0;
+            s.pop_back();
+            s.push_back(num[i]);
         }
-        else
-        {
-            prev = gas[i] - cost[i];
-        }
+        k--;
         i++;
     }
-    return sol;
+    while (i < s.size())
+    {
+        s.push_back(num[i]);
+    }
+    return s;
 }
