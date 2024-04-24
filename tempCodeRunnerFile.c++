@@ -1,34 +1,47 @@
-string removeKdigits(string num, int k)
+#include<iostream>
+#include<climits>
+#define d 256
+using namespace std;
+void search(string text,string patt,int q)
 {
-    if (num.empty())
+    int p=0,t=0;
+    int i,j;
+    int n=text.length();
+    int m=patt.length();
+    int h=1;
+    for(i=0;i<m-1;i++)
     {
-        return "";
+        h=(h*d)%q;
     }
-    if (num.size() == 1 && k > 0)
+    for(i=0;i<m;i++)
     {
-        return "0";
+        p=(p*d+patt[i])%q;
+        t=(t*d+text[i])%q;
     }
-    string s;
-    s.push_back(num[0]);
-    int i = 1;
-    while (i < num.size() && k != 0)
+    for(i=0;i<=n-m;i++)
     {
-        if (s[s.size() - 1] == num[i])
+        if(p==t)
         {
-            s.push_back(num[i]);
-            k++;
+            for(int j=0;j<m;j++)
+            {
+                if(patt[j]!=text[i+j]) break;
+            }
+            if(j==m) cout<<"Pattern Found At Index: "<<i<<endl;
         }
-        if (s[s.size() - 1] > num[i])
-        {
-            s.pop_back();
-            s.push_back(num[i]);
+        if(i<n-m){
+        t=(d*(t-text[i]*h)+text[i+m])%q;
+        if(t<0) t=t+q;
         }
-        k--;
-        i++;
     }
-    while (i < s.size())
-    {
-        s.push_back(num[i]);
-    }
-    return s;
+}
+int main()
+{
+    cout<<"Enter Text: "<<endl;
+    string text;
+    cin>>text;
+    cout<<"Enter Pattern: "<<endl;
+    string patt;
+    cin>>patt;
+    int q=INT_MAX;
+    search(text,patt,q);
 }

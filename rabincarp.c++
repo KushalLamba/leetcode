@@ -1,13 +1,13 @@
 #include <iostream>
 #include <climits>
-using namespace std;
 #define d 256
+using namespace std;
 void search(string text, string patt, int q)
 {
-    int m = patt.length();
     int n = text.length();
-    int i, j;
+    int m = patt.length();
     int p = 0, t = 0;
+    int i, j;
     int h = 1;
     for (i = 0; i < m - 1; i++)
     {
@@ -28,26 +28,24 @@ void search(string text, string patt, int q)
                     break;
             }
             if (j == m)
-            {
-                cout << " Pattern Found AT Index: " << i << endl;
-            }
+                cout << "Pattern Found At Index: " << i << endl;
         }
         if (i < n - m)
         {
-            t = (d * (t - patt[i] * h) + text[i + m]) % q;
+            t = (d * (t - text[i] * h) + text[i + m]) % q;
             if (t < 0)
-                t = (t + q);
+                t = t + q;
         }
     }
 }
 int main()
 {
-    cout << "Enter text string: " << endl;
+    cout << "Enter Text: " << endl;
     string text;
     getline(cin, text);
-    cout << "Enter pattern String: " << endl;
+    cout << "Enter Pattern: " << endl;
     string patt;
     getline(cin, patt);
-    int q = 23;
+    int q = INT_MAX;
     search(text, patt, q);
 }
