@@ -31,17 +31,15 @@ int maximumsum(int *arr, int low, int high)
     int mid = (low + high) / 2;
     int maxsum=0;
     int sum=0;
-    int ssum=0;
     int leftsum = maximumsum(arr, low, mid);
     int rightsum = maximumsum(arr, mid + 1, high);
     int crosssum = total(arr, low, mid, high);
     sum=max(leftsum, max(rightsum, crosssum));
     if(sum>maxsum)
     {
-        ssum=maxsum;
         maxsum=sum;
     }
-    return ssum;
+    return maxsum;
 }
 int main()
 {
