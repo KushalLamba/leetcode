@@ -1,47 +1,62 @@
-#include<iostream>
-#include<climits>
-#define d 256
-using namespace std;
-void search(string text,string patt,int q)
+int height(TreeNode *root)
 {
-    int p=0,t=0;
-    int i,j;
-    int n=text.length();
-    int m=patt.length();
-    int h=1;
-    for(i=0;i<m-1;i++)
+    if (root == NULL)
     {
-        h=(h*d)%q;
+        return 0;
     }
-    for(i=0;i<m;i++)
-    {
-        p=(p*d+patt[i])%q;
-        t=(t*d+text[i])%q;
-    }
-    for(i=0;i<=n-m;i++)
-    {
-        if(p==t)
-        {
-            for(int j=0;j<m;j++)
-            {
-                if(patt[j]!=text[i+j]) break;
-            }
-            if(j==m) cout<<"Pattern Found At Index: "<<i<<endl;
-        }
-        if(i<n-m){
-        t=(d*(t-text[i]*h)+text[i+m])%q;
-        if(t<0) t=t+q;
-        }
-    }
+    return 1 + max(height(root->left), height(root->right));
 }
-int main()
+TreeNode *balanceBST(TreeNode *root)
 {
-    cout<<"Enter Text: "<<endl;
-    string text;
-    cin>>text;
-    cout<<"Enter Pattern: "<<endl;
-    string patt;
-    cin>>patt;
-    int q=INT_MAX;
-    search(text,patt,q);
+    if(root==NULL)
+    {
+        return NULL;
+    }
+    int flag=0;
+    int leftheight=height(root->left);
+    int rightheight=height(root->right);
+    cout<<leftheight<<endl;
+    cout<<rightheight<<endl;
+    TreeNode* check;
+    if(abs(leftheight-rightheight)>1)
+    {
+        if(leftheight>rightheight)
+        {
+            check=root->left;
+            root->left=NULL;
+            TreeNode * temp=check;
+            while(temp->right!=NULL)
+            {
+                temp=temp->right;
+            }
+            temp->right=root;
+            root=check;
+        }
+        if(leftheight<rightheight)
+        {
+            check=root->right;
+            root->right=NULL;
+            TreeNode * temp=check;
+            while(temp->left!=NULL)
+            {
+                temp=temp->left;
+            }
+            temp->left=root;
+            root=check;
+        }
+        flag=1;
+    }
+    TreeNode* leftnode;
+    TreeNode* rightnode;
+    if(flag==0){
+    leftnode=balanceBST(root->left);
+    rightnode=balanceBST(root->right);}
+    else
+    {
+        leftnode=balanceBST(check);
+        rightnode=balanceBST(check); 
+    }
+    if(leftnode!=NULL) root->left=leftnode;
+    if(rightnode!=NULL) root->right=rightnode;
+    return root;
 }
