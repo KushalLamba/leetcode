@@ -2,6 +2,7 @@
   "files.associations": {
     "iostream": "cpp",
     "ostream": "cpp",
-    "valarray": "cpp"
+    "valarray": "cpp",
+    "bitset": "cpp"
   }
 }
